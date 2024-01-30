@@ -21,9 +21,13 @@ body {
 }
 
 #hangman {
-  width: 50vw;
+  width: 150px;
+  height: 150px;
   border: 1px solid red;
   height: 50vh;
+  position: relative;
+  margin: 50px;
+  padding-right: 50px;
 }
 
 #playing-area {
