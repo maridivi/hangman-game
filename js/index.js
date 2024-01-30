@@ -22,11 +22,15 @@ class Game {
   }
 
   displayIncludedCharacter(selectedLetter) {
-    if (
-      game1.currentWord.toUpperCase().includes(selectedLetter.toUpperCase())
-    ) {
-      const charElements = document.getElementsByClassName("character");
-      console.log(charElements);
+    const currentWord = game1.currentWord;
+    for (let i = 0; i < currentWord.length; i++) {
+      if (currentWord[i].toUpperCase() === selectedLetter.toUpperCase()) {
+        console.log(i);
+        const charElements = document.getElementsByClassName("character");
+        charElements[i].innerHTML = currentWord[i];
+      } else {
+        console.log("Wrong");
+      }
     }
   }
 }
