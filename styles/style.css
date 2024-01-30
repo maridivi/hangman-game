@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#board {
+  height: 100vh;
+  background-color: cornflowerblue;
+}
+
+#letters {
+  height: 50vh;
+}
+
+#word {
+  width: 50vw;
+  display: flex;
+  gap: 10px;
+}
