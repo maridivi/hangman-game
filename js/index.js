@@ -25,7 +25,7 @@ class Game {
 
     if (!currentWord.toUpperCase().includes(selectedLetter.toUpperCase())) {
       game1.increaseGuessesCounter();
-      game1.displayHangmanParts();
+      game1.handleWrongGuesses();
     }
     for (let i = 0; i < currentWord.length; i++) {
       if (currentWord[i].toUpperCase() === selectedLetter.toUpperCase()) {
@@ -38,7 +38,11 @@ class Game {
     this.wrongGuessesCounter++;
     console.log(this.wrongGuessesCounter);
   }
-  displayHangmanParts() {
+  showGameOver() {
+    const overlay = document.getElementById("gameover-overlay");
+    overlay.style.display = "flex";
+  }
+  handleWrongGuesses() {
     const hangmanContainer = document.getElementById("hangman");
     const counter = game1.wrongGuessesCounter;
 
@@ -151,7 +155,7 @@ class Game {
         hangmanContainer.appendChild(leftLeg);
         break;
       case 10:
-        console.log("Game over");
+        this.showGameOver();
         break;
       default:
       // code block
