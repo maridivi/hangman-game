@@ -9,7 +9,7 @@ class Game {
     this.wrongGuessesCounter = 0;
   }
   displayHiddenWord() {
-    for (let i = 0; i < this.currentWord.length; i++) {
+    for (let i = 0; i < this.currentWord?.length; i++) {
       const hiddenChar = document.createElement("p");
       //   const char = document.createElement("p");
       const wordContainer = document.getElementById("word");
@@ -76,8 +76,9 @@ class Game {
         break;
       case 4:
         const head = document.createElement("div");
-        head.style.height = "30px";
-        head.style.width = "30px";
+        head.style.height = "20%";
+        head.style.width = "20%";
+        head.style.aspectRatio = "1/1";
         head.style.border = "1px solid black";
         head.style.borderRadius = "100%";
         head.style.position = "absolute";
@@ -85,6 +86,72 @@ class Game {
         head.style.top = "25%";
 
         hangmanContainer.appendChild(head);
+        break;
+      case 5:
+        const body = document.createElement("div");
+        body.style.height = "30%";
+        body.style.width = "3px";
+        body.style.backgroundColor = "black";
+        body.style.position = "absolute";
+        body.style.right = "20%";
+        body.style.top = "45%";
+
+        hangmanContainer.appendChild(body);
+        break;
+      case 6:
+        const rightArm = document.createElement("div");
+        rightArm.style.height = "3px";
+        rightArm.style.width = "15%";
+        rightArm.style.backgroundColor = "black";
+        rightArm.style.position = "absolute";
+        rightArm.style.right = "18%";
+        rightArm.style.top = "55%";
+        rightArm.style.transform = "rotate(-45deg)";
+        rightArm.style.transformOrigin = "top left";
+
+        hangmanContainer.appendChild(rightArm);
+        break;
+      case 7:
+        const leftArm = document.createElement("div");
+        leftArm.style.height = "3px";
+        leftArm.style.width = "15%";
+        leftArm.style.backgroundColor = "black";
+        leftArm.style.position = "absolute";
+        leftArm.style.right = "5%";
+        leftArm.style.top = "45%";
+        leftArm.style.transform = "rotate(45deg)";
+        leftArm.style.transformOrigin = "top left";
+
+        hangmanContainer.appendChild(leftArm);
+        break;
+      case 8:
+        const rightLeg = document.createElement("div");
+        rightLeg.style.height = "3px";
+        rightLeg.style.width = "15%";
+        rightLeg.style.backgroundColor = "black";
+        rightLeg.style.position = "absolute";
+        rightLeg.style.right = "17%";
+        rightLeg.style.top = "83%";
+        rightLeg.style.transform = "rotate(-45deg)";
+        rightLeg.style.transformOrigin = "top left";
+
+        hangmanContainer.appendChild(rightLeg);
+        break;
+      case 9:
+        const leftLeg = document.createElement("div");
+        leftLeg.style.height = "3px";
+        leftLeg.style.width = "15%";
+        leftLeg.style.backgroundColor = "black";
+        leftLeg.style.position = "absolute";
+        leftLeg.style.right = "5%";
+        leftLeg.style.top = "73%";
+        leftLeg.style.transform = "rotate(45deg)";
+        leftLeg.style.transformOrigin = "top left";
+
+        hangmanContainer.appendChild(leftLeg);
+        break;
+      case 10:
+        console.log("Game over");
         break;
       default:
       // code block
