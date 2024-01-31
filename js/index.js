@@ -4,7 +4,7 @@ function getRandomIndex(arr) {
 
 class Game {
   constructor() {
-    this.currentWord = difficultWords[getRandomIndex(difficultWords)];
+    this.currentWord = this.getWord();
     this.displayHiddenWord();
     this.wrongGuessesCounter = 0;
   }
@@ -20,11 +20,32 @@ class Game {
     }
   }
 
+  getWord() {
+    return difficultWords[getRandomIndex(difficultWords)];
+  }
+
   isWordCompleted() {
     const charElements = document.getElementsByClassName("character");
     const charsArr = [...charElements];
 
     return charsArr.every((item) => item.innerText !== "_");
+  }
+
+  restartGame() {
+    this.currentWord = this.getWord();
+    this.wrongGuessesCounter = 0;
+    const overlay = document.getElementById("gameover-overlay");
+
+    overlay.style.display = "none";
+
+    const wordContainer = document.getElementById("word");
+    wordContainer.innerHTML = "";
+
+    this.displayHiddenWord();
+
+    const hangmanParts = document.querySelectorAll(".hangman-part");
+    const array = [...hangmanParts];
+    array.forEach((part) => part.remove());
   }
 
   displayIncludedCharacter(selectedLetter) {
@@ -50,7 +71,13 @@ class Game {
     const overlayMessage = document.getElementById("gameover-message");
     overlay.style.display = "flex";
     overlayMessage.innerText = message;
+    if (message === "Failed!") {
+      const correctWord = document.createElement("p");
+      correctWord.innerText = "The correct answer was " + this.currentWord;
+      overlay.appendChild(correctWord);
+    }
   }
+
   handleWrongGuesses() {
     const hangmanContainer = document.getElementById("hangman");
     const counter = game1.wrongGuessesCounter;
@@ -61,6 +88,7 @@ class Game {
         verticalLine.style.height = "100%";
         verticalLine.style.width = "3px";
         verticalLine.style.backgroundColor = "black";
+        verticalLine.classList.add("hangman-part");
 
         hangmanContainer.appendChild(verticalLine);
 
@@ -72,6 +100,7 @@ class Game {
         horizontalLine.style.backgroundColor = "black";
         horizontalLine.style.position = "absolute";
         horizontalLine.style.top = "0";
+        horizontalLine.classList.add("hangman-part");
 
         hangmanContainer.appendChild(horizontalLine);
         break;
@@ -83,6 +112,7 @@ class Game {
         shortVerticalLine.style.position = "absolute";
         shortVerticalLine.style.right = "20%";
         shortVerticalLine.style.top = "0";
+        shortVerticalLine.classList.add("hangman-part");
 
         hangmanContainer.appendChild(shortVerticalLine);
         break;
@@ -96,6 +126,7 @@ class Game {
         head.style.position = "absolute";
         head.style.right = "13%";
         head.style.top = "25%";
+        head.classList.add("hangman-part");
 
         hangmanContainer.appendChild(head);
         break;
@@ -107,6 +138,7 @@ class Game {
         body.style.position = "absolute";
         body.style.right = "20%";
         body.style.top = "45%";
+        body.classList.add("hangman-part");
 
         hangmanContainer.appendChild(body);
         break;
@@ -120,6 +152,7 @@ class Game {
         rightArm.style.top = "55%";
         rightArm.style.transform = "rotate(-45deg)";
         rightArm.style.transformOrigin = "top left";
+        rightArm.classList.add("hangman-part");
 
         hangmanContainer.appendChild(rightArm);
         break;
@@ -133,6 +166,7 @@ class Game {
         leftArm.style.top = "45%";
         leftArm.style.transform = "rotate(45deg)";
         leftArm.style.transformOrigin = "top left";
+        leftArm.classList.add("hangman-part");
 
         hangmanContainer.appendChild(leftArm);
         break;
@@ -146,6 +180,7 @@ class Game {
         rightLeg.style.top = "83%";
         rightLeg.style.transform = "rotate(-45deg)";
         rightLeg.style.transformOrigin = "top left";
+        rightLeg.classList.add("hangman-part");
 
         hangmanContainer.appendChild(rightLeg);
         break;
@@ -159,6 +194,7 @@ class Game {
         leftLeg.style.top = "73%";
         leftLeg.style.transform = "rotate(45deg)";
         leftLeg.style.transformOrigin = "top left";
+        leftLeg.classList.add("hangman-part");
 
         hangmanContainer.appendChild(leftLeg);
         break;
@@ -166,7 +202,6 @@ class Game {
         this.showGameOver("Failed!");
         break;
       default:
-      // code block
     }
   }
 }
@@ -185,3 +220,8 @@ letterButtons.forEach((button) =>
     }
   })
 );
+
+const restartButton = document.getElementById("restart");
+restartButton.addEventListener("click", () => {
+  game1.restartGame();
+});
