@@ -20,6 +20,13 @@ class Game {
     }
   }
 
+  isWordCompleted() {
+    const charElements = document.getElementsByClassName("character");
+    const charsArr = [...charElements];
+
+    return charsArr.every((item) => item.innerText !== "_");
+  }
+
   displayIncludedCharacter(selectedLetter) {
     const currentWord = game1.currentWord;
 
@@ -38,9 +45,11 @@ class Game {
     this.wrongGuessesCounter++;
     console.log(this.wrongGuessesCounter);
   }
-  showGameOver() {
+  showGameOver(message) {
     const overlay = document.getElementById("gameover-overlay");
+    const overlayMessage = document.getElementById("gameover-message");
     overlay.style.display = "flex";
+    overlayMessage.innerText = message;
   }
   handleWrongGuesses() {
     const hangmanContainer = document.getElementById("hangman");
@@ -54,7 +63,6 @@ class Game {
         verticalLine.style.backgroundColor = "black";
 
         hangmanContainer.appendChild(verticalLine);
-        console.log(verticalLine);
 
         break;
       case 2:
@@ -155,7 +163,7 @@ class Game {
         hangmanContainer.appendChild(leftLeg);
         break;
       case 10:
-        this.showGameOver();
+        this.showGameOver("Failed!");
         break;
       default:
       // code block
@@ -172,5 +180,8 @@ letterButtons.forEach((button) =>
     const selectedLetter = e.target.textContent;
 
     game1.displayIncludedCharacter(selectedLetter);
+    if (game1.isWordCompleted() === true) {
+      game1.showGameOver("Success!");
+    }
   })
 );
