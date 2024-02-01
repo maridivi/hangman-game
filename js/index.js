@@ -7,6 +7,7 @@ const overlay = document.getElementById("gameover-overlay");
 const gameoverMessage = document.getElementById("gameover-message");
 const playingArea = document.getElementById("playing-area");
 const startOverlay = document.getElementById("start-overlay");
+const hangman = document.getElementById("hangman");
 
 class Game {
   constructor() {
@@ -46,6 +47,8 @@ class Game {
 
   restartGame() {
     this.currentWord = this.getWord();
+    playingArea.style.display = "flex";
+    hangman.style.display = "block";
 
     letterButtons.forEach((button) => {
       button.disabled = false;
@@ -84,6 +87,8 @@ class Game {
   showGameOver(message) {
     overlay.style.display = "flex";
     gameoverMessage.innerText = message;
+    hangman.style.display = "none";
+    playingArea.style.display = "none";
     if (message === "Failed!") {
       const correctWord = document.getElementById("correct-answer");
       correctWord.innerText = "The correct answer was " + this.currentWord;
@@ -158,7 +163,7 @@ letterButtons.forEach((button) =>
     button.setAttribute("disabled", "true");
     if (game1.isWordCompleted() === true) {
       game1.showGameOver("You did it!");
-      gameoverMessage.style.color = "green";
+      gameoverMessage.style.color = "#B5CB99";
     }
   })
 );
@@ -176,7 +181,7 @@ document.addEventListener("keydown", (e) => {
   if (game1.isWordCompleted() === true) {
     game1.showGameOver("You did it!");
 
-    gameoverMessage.style.color = "green";
+    gameoverMessage.style.color = "#B5CB99";
   }
 });
 
