@@ -8,6 +8,7 @@ const gameoverMessage = document.getElementById("gameover-message");
 const playingArea = document.getElementById("playing-area");
 const startOverlay = document.getElementById("start-overlay");
 const hangman = document.getElementById("hangman");
+const gameOverImage = document.getElementById("gameover-image");
 
 class Game {
   constructor() {
@@ -61,10 +62,6 @@ class Game {
     wordContainer.innerHTML = "";
 
     this.displayHiddenWord();
-
-    const hangmanParts = document.querySelectorAll(".hangman-part");
-    const array = [...hangmanParts];
-    array.forEach((part) => part.remove());
   }
 
   displayIncludedCharacter(selectedLetter) {
@@ -89,9 +86,15 @@ class Game {
     gameoverMessage.innerText = message;
     hangman.style.display = "none";
     playingArea.style.display = "none";
+    const hangmanParts = document.querySelectorAll(".hangman-part");
+    const array = [...hangmanParts];
+    array.forEach((part) => (part.style.display = "none"));
     if (message === "Failed!") {
       const correctWord = document.getElementById("correct-answer");
       correctWord.innerText = "The correct answer was " + this.currentWord;
+      gameOverImage.setAttribute("src", "../images/death-2026312_1280.png");
+    } else {
+      gameOverImage.setAttribute("src", "../images/character.png");
     }
   }
 
@@ -154,7 +157,7 @@ class Game {
 
 let game1;
 
-const letterButtons = document.querySelectorAll("#letter-button");
+const letterButtons = document.querySelectorAll(".letter-button");
 letterButtons.forEach((button) =>
   button.addEventListener("click", (e) => {
     const selectedLetter = e.target.textContent;
@@ -169,11 +172,19 @@ letterButtons.forEach((button) =>
 );
 
 document.addEventListener("keydown", (e) => {
-  const selectedLetter = e.code.slice(3);
+  const selectedLetter = e.key.toUpperCase();
+
+  if (!isLetter(selectedLetter)) return;
+
+  const isDisabled = document
+    .querySelector(`[data-letter=${selectedLetter}]`)
+    .getAttribute("disabled");
+
+  if (isDisabled) return;
 
   game1.displayIncludedCharacter(selectedLetter);
   letterButtons.forEach((button) => {
-    if (button.innerHTML === selectedLetter) {
+    if (button.innerText === selectedLetter) {
       button.setAttribute("disabled", "true");
     }
   });
@@ -194,3 +205,34 @@ const playButton = document.getElementById("start");
 playButton.addEventListener("click", () => {
   game1 = new Game();
 });
+
+const isLetter = (letter) => {
+  return [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ].includes(letter);
+};
