@@ -92,9 +92,9 @@ class Game {
     if (message === "Failed!") {
       const correctWord = document.getElementById("correct-answer");
       correctWord.innerText = "The correct answer was " + this.currentWord;
-      gameOverImage.setAttribute("src", "/images/death-2026312_1280.png");
+      gameOverImage.setAttribute("src", "./images/death-2026312_1280.png");
     } else {
-      gameOverImage.setAttribute("src", "/images/character.png");
+      gameOverImage.setAttribute("src", "./images/character.png");
     }
   }
 
