@@ -8,14 +8,16 @@ body {
   height: 100vh;
   background-color: cornflowerblue;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 
 #letters {
   height: max-content;
-  margin: 0 auto;
-  width: 70%;
+  margin: 20px auto;
+  width: 100%;
   /* display: grid;
   grid-template-columns: 10% 10% 10% 20%; */
 }
@@ -36,19 +38,22 @@ body {
 #hangman {
   width: 150px;
   height: 150px;
-  height: 50vh;
+
   position: relative;
   margin: 50px;
   padding-right: 50px;
 }
 
 #playing-area {
-  width: 50vw;
+  width: 70vw;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
+
+  margin: 50px;
 }
 
 #gameover-overlay {
@@ -63,9 +68,20 @@ body {
   align-items: center;
   z-index: 1000;
   display: none;
+  flex-direction: column;
 }
 
 #gameover-message {
+  color: red;
+  font-size: xx-large;
+}
+
+#correct-answer {
   color: white;
-  font-size: large;
+}
+
+@media only screen and (min-width: 500px) {
+  #board {
+    flex-direction: row;
+  }
 }

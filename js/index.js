@@ -8,6 +8,7 @@ class Game {
     this.displayHiddenWord();
     this.wrongGuessesCounter = 0;
   }
+
   displayHiddenWord() {
     for (let i = 0; i < this.currentWord?.length; i++) {
       const hiddenChar = document.createElement("p");
@@ -18,6 +19,7 @@ class Game {
       hiddenChar.classList.add("character");
       wordContainer.appendChild(hiddenChar);
     }
+    console.log(this.currentWord);
   }
 
   getWord() {
@@ -33,6 +35,7 @@ class Game {
 
   restartGame() {
     this.currentWord = this.getWord();
+
     this.wrongGuessesCounter = 0;
     const overlay = document.getElementById("gameover-overlay");
 
@@ -64,7 +67,6 @@ class Game {
   }
   increaseGuessesCounter() {
     this.wrongGuessesCounter++;
-    console.log(this.wrongGuessesCounter);
   }
   showGameOver(message) {
     const overlay = document.getElementById("gameover-overlay");
@@ -72,9 +74,8 @@ class Game {
     overlay.style.display = "flex";
     overlayMessage.innerText = message;
     if (message === "Failed!") {
-      const correctWord = document.createElement("p");
+      const correctWord = document.getElementById("correct-answer");
       correctWord.innerText = "The correct answer was " + this.currentWord;
-      overlay.appendChild(correctWord);
     }
   }
 
@@ -124,7 +125,7 @@ class Game {
         head.style.border = "1px solid black";
         head.style.borderRadius = "100%";
         head.style.position = "absolute";
-        head.style.right = "13%";
+        head.style.right = "12%";
         head.style.top = "25%";
         head.classList.add("hangman-part");
 
@@ -207,7 +208,6 @@ class Game {
 }
 
 const game1 = new Game();
-console.log(game1.currentWord);
 
 const letterButtons = document.querySelectorAll("#letter-button");
 letterButtons.forEach((button) =>
@@ -215,8 +215,11 @@ letterButtons.forEach((button) =>
     const selectedLetter = e.target.textContent;
 
     game1.displayIncludedCharacter(selectedLetter);
+    // button.setAttribute("disabled", "true");
     if (game1.isWordCompleted() === true) {
-      game1.showGameOver("Success!");
+      game1.showGameOver("You did it!");
+      const gameoverMessage = document.getElementById("gameover-message");
+      gameoverMessage.style.color = "green";
     }
   })
 );
