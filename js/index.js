@@ -36,6 +36,10 @@ class Game {
   restartGame() {
     this.currentWord = this.getWord();
 
+    letterButtons.forEach((button) => {
+      button.disabled = false;
+    });
+
     this.wrongGuessesCounter = 0;
     const overlay = document.getElementById("gameover-overlay");
 
@@ -215,7 +219,7 @@ letterButtons.forEach((button) =>
     const selectedLetter = e.target.textContent;
 
     game1.displayIncludedCharacter(selectedLetter);
-    // button.setAttribute("disabled", "true");
+    button.setAttribute("disabled", "true");
     if (game1.isWordCompleted() === true) {
       game1.showGameOver("You did it!");
       const gameoverMessage = document.getElementById("gameover-message");
@@ -223,6 +227,23 @@ letterButtons.forEach((button) =>
     }
   })
 );
+
+document.addEventListener("keydown", (e) => {
+  const selectedLetter = e.code.slice(3);
+
+  game1.displayIncludedCharacter(selectedLetter);
+  letterButtons.forEach((button) => {
+    if (button.innerHTML === selectedLetter) {
+      button.setAttribute("disabled", "true");
+    }
+  });
+
+  if (game1.isWordCompleted() === true) {
+    game1.showGameOver("You did it!");
+    const gameoverMessage = document.getElementById("gameover-message");
+    gameoverMessage.style.color = "green";
+  }
+});
 
 const restartButton = document.getElementById("restart");
 restartButton.addEventListener("click", () => {
