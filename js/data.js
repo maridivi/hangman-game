@@ -2,7 +2,7 @@ const difficultWords = [
   "Quixotic",
   "Mnemonic",
   "Gerrymander",
-  "Kaleidoscope",
+
   "Zephyr",
   "Rhythmic",
   "Pharaoh",
@@ -29,4 +29,18 @@ const difficultWords = [
   "Omnivorous",
   "Nebulous",
   "Metamorphosis",
+  "Maelstrom",
+  "Gargantuan",
+
+  "Rhapsody",
+  "Quagmire",
+  "Sovereignty",
+  "Hypothetical",
+  "Kaleidoscope",
+  "Phantasmagoria",
+  "Quintessential",
+  "Serendipity",
+  "Ventriloquist",
+  "Discombobulate",
+  "Flabbergasted",
 ];
