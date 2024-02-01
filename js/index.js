@@ -5,12 +5,20 @@ function getRandomIndex(arr) {
 const wordContainer = document.getElementById("word");
 const overlay = document.getElementById("gameover-overlay");
 const gameoverMessage = document.getElementById("gameover-message");
+const playingArea = document.getElementById("playing-area");
+const startOverlay = document.getElementById("start-overlay");
 
 class Game {
   constructor() {
     this.currentWord = this.getWord();
     this.displayHiddenWord();
     this.wrongGuessesCounter = 0;
+    this.displayGameElements();
+  }
+
+  displayGameElements() {
+    playingArea.style.display = "flex";
+    startOverlay.style.display = "none";
   }
 
   displayHiddenWord() {
@@ -139,7 +147,7 @@ class Game {
   }
 }
 
-const game1 = new Game();
+let game1;
 
 const letterButtons = document.querySelectorAll("#letter-button");
 letterButtons.forEach((button) =>
@@ -175,4 +183,9 @@ document.addEventListener("keydown", (e) => {
 const restartButton = document.getElementById("restart");
 restartButton.addEventListener("click", () => {
   game1.restartGame();
+});
+
+const playButton = document.getElementById("start");
+playButton.addEventListener("click", () => {
+  game1 = new Game();
 });
