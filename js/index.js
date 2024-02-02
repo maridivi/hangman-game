@@ -32,7 +32,6 @@ class Game {
       hiddenChar.classList.add("character");
       wordContainer.appendChild(hiddenChar);
     }
-    console.log(this.currentWord);
   }
 
   getWord() {
