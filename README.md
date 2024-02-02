@@ -6,8 +6,15 @@ The Hangman game is a classic word-guessing game that challenges players to gues
 
 ## Instructions
 
-The game starts with a blank representation of a word, where each blank space represents a letter in the word. Players guess one letter at a time, and if the guessed letter is in the word, it is revealed in its correct position(s).
-If the guessed letter is not in the word, one part of the hangman is drawn as a penalty. The game continues until the player either guesses the word correctly, saving the hangman, or the hangman is fully drawn, indicating the player has run out of guesses and lost the game.
+1. Open the game on your device to be greeted by the medieval-themed introduction screen.
+2. Click the "Start Game" button.
+
+3. You will be presented with a series of underscores representing the hidden word you need to guess.
+4. Click (or type with keyboard) on the alphabet buttons on the screen to select a letter you believe is in the word.
+   If the letter is correct, it will appear in its correct position(s) in the hidden word.
+   If incorrect, a part of the hangman will be drawn, marking one step closer to the hangman's completion.
+   Winning the Game: Successfully guess all the letters in the word before the hangman is fully drawn to win.
+   Losing the Game: If the hangman is fully drawn before you guess the word, the game is over. The correct word will be revealed.
 
 ## Demo
 
